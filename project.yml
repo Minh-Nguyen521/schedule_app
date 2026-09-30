@@ -1,0 +1,71 @@
+name: Schedule
+options:
+  bundleIdPrefix: com.dedestudio
+  deploymentTarget:
+    iOS: "18.0"
+  createIntermediateGroups: true
+  groupSortPosition: top
+
+settings:
+  base:
+    SWIFT_VERSION: "6.0"
+    SWIFT_DEFAULT_ACTOR_ISOLATION: MainActor
+    SWIFT_APPROACHABLE_CONCURRENCY: YES
+    DEVELOPMENT_TEAM: R8M838858C
+    CODE_SIGN_STYLE: Automatic
+    ENABLE_USER_SCRIPT_SANDBOXING: YES
+    MARKETING_VERSION: "1.0"
+    CURRENT_PROJECT_VERSION: "1"
+
+targets:
+  Schedule:
+    type: application
+    platform: iOS
+    sources:
+      - path: Sources/Schedule
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.dedestudio.schedule
+        GENERATE_INFOPLIST_FILE: YES
+        INFOPLIST_KEY_CFBundleDisplayName: Schedule
+        INFOPLIST_KEY_UILaunchScreen_Generation: YES
+        INFOPLIST_KEY_UISupportedInterfaceOrientations: UIInterfaceOrientationPortrait
+        INFOPLIST_KEY_UIUserInterfaceStyle: Automatic
+        INFOPLIST_KEY_NSUserNotificationsUsageDescription: Schedule reminds you about your habits at the time you choose.
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        ENABLE_PREVIEWS: YES
+        TARGETED_DEVICE_FAMILY: "1"
+
+  # --- ScheduleWidget: intentionally disabled. -------------------------------
+  # A WidgetKit extension needs an App Group to read the app's SwiftData store,
+  # and Xcode refuses the App Groups capability on a free Personal Team.
+  # Enabling this requires the $99/yr Developer Program; see docs/SIGNING.md.
+  # ScheduleWidget:
+  #   type: app-extension
+  #   platform: iOS
+  #   sources: [Sources/ScheduleWidget]
+
+  ScheduleTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources:
+      - path: Tests/ScheduleTests
+    dependencies:
+      - target: Schedule
+    settings:
+      base:
+        GENERATE_INFOPLIST_FILE: YES
+
+schemes:
+  Schedule:
+    build:
+      targets:
+        Schedule: all
+    run:
+      config: Debug
+    test:
+      config: Debug
+      targets:
+        - ScheduleTests
+    archive:
+      config: Release

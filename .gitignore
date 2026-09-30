@@ -1,0 +1,8 @@
+# Generated from project.yml — regenerate with `xcodegen generate`
+Schedule.xcodeproj/
+
+build/
+DerivedData/
+*.xcuserstate
+xcuserdata/
+.DS_Store
